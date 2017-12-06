@@ -26,4 +26,18 @@ class ProductImage(models.Model):
     
     def __str__(self):
         return str(self.image)
+        
+        
+class Review(models.Model):
+    author = models.ForeignKey('auth.User')
+    product = models.ForeignKey(Product, related_name="reviews")
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    
+
+    
+    
+    def __str__(self):
+        return self.title
     

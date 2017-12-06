@@ -62,6 +62,7 @@ def addcomment(request, post_id):
     post= get_object_or_404(Post, pk=post_id)
     
     form = BlogCommentForm(request.POST)
+    ctx = {'form': form}
     if form.is_valid():
         comment = form.save(commit=False)
         comment.author = request.user
@@ -69,4 +70,4 @@ def addcomment(request, post_id):
         
         comment.save()
         
-        return redirect('viewpost', post_id)
+        return redirect('viewpost', post_id, ctx)

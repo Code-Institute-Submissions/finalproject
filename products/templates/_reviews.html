@@ -1,0 +1,20 @@
+{% load bootstrap_tags %}
+
+<h2>Reviews</h2>
+
+<form method ='POST' action="{% url 'add_review' product.id %}">
+    {% csrf_token %}
+    {{ form | as_bootstrap}}
+    <button type ="submit">Add Your Review</button>
+</form>
+
+{% for review in product.reviews.all %}
+
+<div>
+    <p>This is our Partial HTML Page</p>
+    <h3>{{ review.title }}</h3>
+    <p>{{ review.content }}</p>
+    <p><strong>{{ review.author.username }}</strong> - {{ review.created_date }}</p>
+</div>
+
+{% endfor %}
