@@ -1,9 +1,13 @@
 {% extends "base.html" %}
+{% load static from staticfiles %}
 {% load bootstrap_tags %}
 
 {% block content %}
 
 <div class = "container"> <!--Start of actual Profile Container -->
+
+
+    <img src="{% static "images/image1.jpg" %}"></img>
 
     <div class = "row"> <!-- Top Row, Username, Location and Profile Pic in here -->
         <div class = "col-sm-3"><!--Profile Pic-->
