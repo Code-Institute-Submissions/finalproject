@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-USE_S3 = os.environ.get("USE_S3", True)
+USE_S3 = os.environ.get("USE_S3", False)
 
 ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'), 'stejmscott-style-stream3.herokuapp.com']
 
