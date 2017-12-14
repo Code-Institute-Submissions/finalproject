@@ -1,1 +1,1 @@
-web: gunicorn styleservice.wsgi: application
+web: gunicorn styleservice.wsgi:application
