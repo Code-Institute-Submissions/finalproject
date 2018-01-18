@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+<div class = "row row-flex">
+
+{% for package in packages %}
+
+<div class = "col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-1 display panel panel-default">
+    
+    <div class = "panel-body">
+        <a href="{% url 'packagedeets' package.id %}">
+        <div class = "package" style = "background-image: url('{{MEDIA_URL}}{{package.image}}')"></div>
+        <h3>{{package.name}}</h3>
+        <p>{{package.price}}</p>
+        </a>
+        
+        
+    </div>
+    
+    
+    
+</div>
+
+
+{% endfor %}
+</div>
+
+
+{% endblock %}

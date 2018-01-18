@@ -2,11 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     image = models.ImageField(upload_to="avatars", blank=True, null=True, default="avatars/user.png")
+    stripe_id = models.CharField(max_length = 50, default='')
+    subscription_end = models.DateTimeField(default=timezone.now)
+    
+    @property
+    def subscription_active(self):
+        return self.subscription_end > timezone.now()
+
     
 
 

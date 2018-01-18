@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product
+from .models import Product, Category, Review
 from django.contrib.auth.decorators import login_required
 from .forms import ProductReviewForm
 
@@ -7,6 +7,23 @@ from .forms import ProductReviewForm
 def get_products(request):
     products = Product.objects.all()
     return render(request, 'products.html', {'products': products})
+
+    
+def show_category(request,hierarchy= None):
+    category_slug = hierarchy.split('/')
+    parent = None
+    root = Category.objects.all()
+
+    for slug in category_slug[:-1]:
+        parent = root.get(parent=parent, slug = slug)
+
+    try:
+        instance = Category.objects.get(parent=parent,slug=category_slug[-1])
+    except:
+        instance = get_object_or_404(Product, slug = category_slug[-1])
+        return render(request, "product_detail.html", {'instance':instance})
+    else:
+        return render(request, 'categories.html', {'instance':instance})
     
     
 def do_search(request):
@@ -29,6 +46,7 @@ def add_review(request, product_id):
         review = form.save(commit=False)
         review.author = request.user
         review.product = product
+        review.rating = form.cleaned_data.get('rating')
         
         review.save()
         

@@ -1,17 +1,9 @@
-from django.db import models
 
-# Create your models here.
 from django.db import models
 from django.utils import timezone
 
 
 class Post(models.Model):
-    """
-    Here we'll define our Post model
-    """
-
-    # author is linked to a registered
-    # user in the 'auth_user' table.
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     content = models.TextField()

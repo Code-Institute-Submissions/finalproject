@@ -21,7 +21,7 @@
                 <td>{{ item.product.name }}</td>
                 <td>{{ item.product.description }}</td>
                 <td>{{ item.quantity }}</td>
-                <td>{{ item.product.price }}</td>
+                <td>€{{ item.product.price }}</td>
                 <td>
                     <form method="post" action="{% url 'adjust_cart' item.id %}">
                         {% csrf_token %}
@@ -37,7 +37,7 @@
             <td></td>
             <td></td>
             <td>Total</td>
-            <td>{{ total }}</td>
+            <td>€{{ total }}</td>
             <td><a href="{% url 'checkout' %}" class="btn btn-success" role="button">Checkout</a></td>
         </tr>
         </tbody>

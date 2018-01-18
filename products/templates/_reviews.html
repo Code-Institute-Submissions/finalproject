@@ -1,4 +1,5 @@
 {% load bootstrap_tags %}
+{% load ratings %}
 
 <h2>Reviews</h2>
 
@@ -12,9 +13,11 @@
 
 <div>
     <p>This is our Partial HTML Page</p>
-    <h3>{{ review.title }}</h3>
+    <h3>{{ review.title }} -{% ratings product %} </h3>
     <p>{{ review.content }}</p>
     <p><strong>{{ review.author.username }}</strong> - {{ review.created_date }}</p>
 </div>
+
+
 
 {% endfor %}

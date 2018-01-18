@@ -1,12 +1,273 @@
-body {
+/* imported fonts */
+
+
+
+
+/* base.html styling */
+
+body{
+    margin:0 auto;
     font-family: Arial;
-    padding-top: 100px;
+    padding-top: 50px;
+    bottom:0px;
+    padding-bottom: 0px;
+    min-height: 100%;
 }
 
+.content{
+    min-height: calc(100vh - 220px);
+}
+
+
+.footer{
+    padding-top: 0px;
+    height: 50px;
+}
+
+
 footer {
+    height:200px;
     margin-top: 40px;
-    padding-top: 40px;
+    padding-top: 20px;
     padding-bottom: 40px;
     border-top: 1px solid #ededed ;
     color: #A9A9A9 ;
+}
+
+
+.social-links{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    
+    
+}
+.social-links li a i{
+    width:32px;
+    height:32px;
+    padding:12px 0;
+    border-radius:50%;
+    font-size:13px;
+    line-height: 7px;
+    text-align: center;
+    color:#fafafa;
+    background:#8f8f8f;
+    transition:all 0.35s ease-in-out;
+    -moz-transition:all 0.35s ease-in-out;
+    -webkit-transition:all 0.35s ease-in-out;
+    -o-transition:all 0.35s ease-in-out;
+}
+
+.social-links li a i:hover{
+    background:#e84610;
+    
+}
+
+/* media queries */
+
+@media (min-width:1040px){
+    .mobile{
+        display: none;
+    }
+}
+
+@media only screen and (max-width:1040px){
+    .desktop{
+        display:none;
+    }
+    
+    .mobile{
+        display: inherit;
+    }
+}
+
+/* end of base.html styling */
+
+/* index styling */
+
+.mobindex{
+    min-height:100vh;
+    min-width:100vw;
+    background:pink;
+}
+
+.quarter{
+  min-width:50vw;
+  min-height:50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quarter > .btn{
+   max-width:50%;
+}
+
+
+.subindex{
+    background:url(/static/images/styleindex.jpg);
+    background-size:cover;
+}
+
+.shopindex{
+    background:url(/static/images/shopindex.jpg);
+    background-size:cover;
+}
+
+.blogindex{
+    background:url(/static/images/blogindex.jpg);
+    background-size:cover;
+}
+
+.registerindex{
+    background:url(/static/images/registerindex.jpg);
+    background-size:cover;
+}
+
+
+.topimgindex, .midimgindex, .botimgindex{
+    position:relative;
+    background-attachment:fixed;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.topimgindex{
+    background-image:url(/static/images/topdesktop.jpg);
+    min-height:400px;
+}
+
+.midimgindex{
+    background-image:url(/static/images/shopindex.jpg);
+    min-height:400px;
+    
+}
+
+.botimgindex{
+    background-image:url(/static/images/blogindex.jpg);
+    min-height:400px;
+    
+}
+
+.deskregpic{
+    background-image:url(/static/images/botdesktop.jpg);
+    min-height:400px;
+    background-size:cover;
+}
+
+.caption {
+    position:absolute;
+    left:0;
+    top:50%;
+    width:100%;
+    text-align:center;
+    color: #000;
+}
+
+.caption span.border{
+    background-color: #111;
+    color:#fff;
+    padding: 18px;
+    font-size:25px;
+
+}
+
+.welcome{
+    color:#777;
+    background-color:white;
+    text-align:center;
+    padding:50px 80px;
+    text-align: justify;
+    
+}
+
+.introh3{
+    letter-spacing:5px;
+    text-transform:uppercase;
+    font: 20px;
+    color: #111;
+}
+
+.midcap{
+    background-color:transparent;
+    font-size:25px;
+    color:#f7f7f7;
+}
+
+.why{
+    position:relative;
+}
+
+.whydetails{
+    color:#ddd;
+    background-color:#282E34;
+    text-align:center;
+    padding:50px 80px;
+    text-align:justify;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+/* end of index styling */
+
+
+
+.badge{
+    padding-left:9px;
+    padding-right:9px;
+    -webkit-border-radius:9px;
+    -moz-border-radius:9px;
+    border-radius:9px;
+    
+}
+
+.label-warning[href],
+.badge-warning[href]{
+    background-color: #c67605;
+    
+}
+
+.product {
+    background-size:contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width:150px;
+    height:150px;
+    margin: 0 auto;
+}
+
+
+caption p {
+    word-wrap : break-word;
+}
+
+.row.row-flex{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.panel-default{
+    border-color:transparent;
+    padding: 0 10px;
+}
+
+.panel-body {
+    height:100%;
+    border: 1px solid #ddd;
+    
+}
+    
+.product-description{
+    min-height:40px;
 }

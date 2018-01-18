@@ -18,6 +18,7 @@ from django.contrib import admin
 from accounts import urls as accounts_urls
 from accounts.views import get_index
 from products import urls as products_urls
+from packages import urls as packages_urls
 from cart import urls as carts_urls
 from checkout import urls as checkouts_urls
 from blog import urls as blogs_urls
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'^$', get_index, name='home'),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^products/', include(products_urls)),
+    url(r'^packages/', include(packages_urls)),
     url(r'^cart/', include(carts_urls)),
     url(r'^checkout/', include(checkouts_urls)),
     url(r'^blog/', include(blogs_urls)),

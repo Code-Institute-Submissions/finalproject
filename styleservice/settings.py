@@ -40,12 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_forms_bootstrap',
+    'star_ratings',
     'accounts',
     'products',
+    'packages',
     'storages',
     'cart',
     'checkout',
     'blog',
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +83,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'styleservice.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -138,14 +141,12 @@ STATICFILES_DIRS = (
 
 
 
+
 if USE_S3:
     STATICFILES_LOCATION='static'
     STATICFILES_STORAGE='custom_storages.StaticStorage'
     
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    
-    
-    
     
     AWS_S3_OBJECT_PARAMETERS = {  
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
@@ -172,3 +173,20 @@ DISABLE_COLLECTSTATIC=1
 STRIPE_PUBLISHABLE_KEY=os.getenv('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY=os.getenv('STRIPE_SECRET_KEY')
 
+
+#Message storage/ Sending emails
+#email to console
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#email to inbox
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get("EMAIL_ADDRESS")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+EMAIL_PORT = 587 
+
+
+#mptt settings
+MPTT_ADMIN_LEVEL_INDENT = 20
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
