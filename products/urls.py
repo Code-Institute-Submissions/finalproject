@@ -7,6 +7,7 @@ urlpatterns=[
     url(r'^search/', do_search, name="search"),
     url(r'^(\d+)$', product_details, name='product_details'),
     url(r'^(\d+)/review/add$', add_review, name="add_review"),
-    url(r'^category/(?P<hierarchy>.+)/$', show_category, name='category'),
+    url(r'^categories/$', show_category, name ="categories"),
+    # url(r'^category/(?P<hierarchy>.+)/$', show_category, name='category'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     ]

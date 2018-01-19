@@ -4,39 +4,39 @@
 {% block head_title %} {{ instance.name }} {% endblock %}
 
 {% block content %}
-<br>
-<div class="text-center"><h2>{{instance.name}}</h2></div>
 
-{% if  instance.children.all %}
-    <h4>Sub Categories</h4>
-    {% for i in instance.children.all %}
-        <a href="{{ i.slug }}"> {{ i.name }} </a><br>
-    {% endfor %}
+{% load mptt_tags %}
 
-    <br><hr>
-{% endif %}
+<ul>
+    {% recursetree nodes %}
+        <li>
+            {{ node.name }}
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
 
-{% if  instance.post_set.all %}
- {% for i in instance.post_set.all %}
-  <h4>Products</h4>
-  <div class="row small-up-1 medium-up-3" >
 
-   <div class="column">
-    <a href="{{ i.slug }}">
-      <div class="card" style="width: 300px; border-color: black">
-         <div class="card-divider">
-           <strong>{{ i.title | truncatechars:30}}</strong>
-         </div>
+ {% recursetree nodes %}
+ 
+ {{ node.name }}
+ <li class = "dropdown" id = "category.name">
+  <a href = "{% url 'categories' category.id %}" class = "dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">{{category.name}}</a>
+ 
+ {% if not node.is_leaf_node %}
+ <ul class = "dropdown-menu children" id = "dropdown-menu-{{ category.name }}">
+   <li><a href= "{% url 'categories' category.id" >{{ children }}</a></li>
+ </ul>
+ {% endif %}
+ 
+ </li>
+ 
+ 
+ {% endrecursetree %}
 
-         <div class="card-section">
-          <small>{{ i.publish}} </small>
-          <p>{{ i.content | safe | truncatechars_html:120 }}</p>
-         </div>
-      </div>
-    </a>
-   </div>
-{% endfor %}
-
-{% endif %}
-</div>
 {% endblock %}
+
