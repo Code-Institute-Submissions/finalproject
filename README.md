@@ -81,7 +81,7 @@ Reviews on products were handled by the Django-Star-Ratings package. After deplo
 If that is not the case...
 
 * What they should look like:<br/>
-![Working Star](./mockup/starsinaction.png)
+![Working Star](.mockups/starinaction.png)
 
 
 
