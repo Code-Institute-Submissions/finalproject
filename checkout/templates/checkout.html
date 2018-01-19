@@ -1,9 +1,9 @@
 {% extends "base.html" %}
+{% load static from staticfiles %}
 {% load bootstrap_tags %}
 
 
 {% block head_js %}
-
   <script src="https://js.stripe.com/v2/" type="text/javascript"></script>
   <script type="text/javascript">
       //<![CDATA[
@@ -11,7 +11,6 @@
       //]]>
   </script>
   <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
-  
 {% endblock %}
 
 {% block content %}

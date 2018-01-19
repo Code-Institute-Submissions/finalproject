@@ -40,6 +40,3 @@ class Review(models.Model):
     
     def __str__(self):
         return self.title
-        
-# class avgrating(models.Model):
-#     average = Review.objects.all().aggregate(Avg('rating'))
