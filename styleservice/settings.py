@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_forms_bootstrap',
     'star_ratings',
+    'arrow',
     'accounts',
     'products',
     'packages',
