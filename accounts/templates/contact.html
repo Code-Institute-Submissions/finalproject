@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}   
+
+
+{% block content %}
+
+<div class= "container">
+    <div class = "col-sm-6">
+    <h1> CONTACT US</h1>
+    <p> By phone: 01 1231234</p>
+    <p> By email: support@styleservive.com</p>
+    <p> Or why not fill out the form on this page. and we'll be in touch</p>
+    </div>
+    
+    <div class = "col-sm-6">
+    <div class = "centerform">
+            <form role="form" method="post" >
+                <legend>Get In Touch</legend>
+                {% csrf_token %}
+                
+                {{ form | as_bootstrap }}
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-success hvr-grow" onclick= "show_alert();">Submit</button>
+                </div>
+            </form>
+        </div>
+        
+        </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+
+
+    
+    
+    
+    <script type="text/javascript">
+        function show_alert() {
+            alert("Thanks, we'll let our stylists know!");
+}
+        
+    </script>
+    
+ 
+    
+    
+{% endblock %}

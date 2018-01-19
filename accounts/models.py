@@ -8,14 +8,13 @@ from django.utils import timezone
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     image = models.ImageField(upload_to="avatars", blank=True, null=True, default="avatars/user.png")
-    stripe_id = models.CharField(max_length = 50, default='')
+    stripe_id = models.CharField(max_length = 50, default='', blank=True, null=True)
     subscription_end = models.DateTimeField(default=timezone.now)
     
     @property
     def subscription_active(self):
         return self.subscription_end > timezone.now()
 
-    
 
 
 @receiver(post_save, sender=User)

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponse
 
 def view_cart(request):
     """A view that renders the cart contents page"""
@@ -14,7 +15,8 @@ def add_to_cart(request, id):
     cart[id] = cart.get(id, quantity)
     
     request.session['cart'] = cart    
-    return redirect(reverse('home'))
+    return redirect(reverse('productlist'))
+    return HttpResponse(json.dumps(your_data))
 
 
 def adjust_cart(request, id):

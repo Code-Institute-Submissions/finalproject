@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Packages
 from django.contrib.auth.decorators import login_required
 from .forms import PackageForm
+from accounts.forms import StartASub
+
+
 
 # Create your views here.
 def get_packages(request):
@@ -12,6 +15,6 @@ def get_packages(request):
 def package_details(request, id):
     this_package = get_object_or_404(Packages, pk=id)
     form = PackageForm
-    subform = DynamicSub
+    subform = StartASub
     return render(request, "package_details.html", {'package' : this_package, 'form':form, 'subform':subform})
-    
+ 

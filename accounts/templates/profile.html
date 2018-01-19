@@ -2,36 +2,92 @@
 {% load static from staticfiles %}
 {% load bootstrap_tags %}
 
+{% block head_js %}
+    <script src="https://js.stripe.com/v2/" type="text/javascript"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        Stripe.publishableKey = '{{ publishable }}';
+        //]]>
+    </script>
+    <script type="text/javascript" src="{% static "js/stripe.js" %}"></script>
+{% endblock %}
+
 {% block content %}
 
-<div class = "container"> <!--Start of actual Profile Container -->
+<div class = "container centered"> <!--Start of actual Profile Container -->
 
     <div class = "row"> <!-- Top Row, Username, Location and Profile Pic in here -->
-        <div class = "col-sm-3"><!--Profile Pic-->
+        <div id="profilepicture" class = "col-xs-12 "><!--Profile Pic-->
             <img src="{{ MEDIA_URL }}{{ request.user.profile.image }}"
-                                                        style="width:200px; height: 200px; background-color: #12ABB2; color: #ffffff;">
+                                                        style="width:200px; height: 200px; background-color: #12ABB2; color: #ffffff; text-align:center">
+                                                        
             
         </div>
         
-        <div class = "col-sm-9"><!--Username and Location -->
+        <div class = "col-xs-12"><!--Username-->
             
             <h2>{{user.username}}</h2>
-            <p>{{user.location}}</p>
             
             
         </div>
         
     </div><!-- End of Profile Pic row -->
     
-    <div class = "row"> <!--Subscriptions and stylists-->
+    <div class = "row"> <!--Subscriptions-->
+    
+    <h3> Your Subscription Details</h3>
+    {% if user.profile.subscription_active %}
+        
+        <p> Your subscription will automatically renew in '{{ user.profile.subscription_end|timeuntil }}</p>
+        <p> We'd be sorry to see you leave, but if you gotta go, let us know!</p>
+        <p>
+        <a href="{% url "cancel_subscription" %}"
+                            onclick="return cancelSubscriptionCheck();"
+                            class="btn btn-danger">Cancel Subscription</a>
+        </p>
+        <div class = "centerform">
+            <form role="form" method="post" >
+                <legend>Update Your Style Requirements</legend>
+                {% csrf_token %}
+                
+                {{ updateform | as_bootstrap }}
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-success hvr-grow" onclick= "show_alert();">Update</button>
+                </div>
+            </form>
+        </div>
+            
+    
+    {% else %}
+    
+    <p>Test NOPE</p>
+    
+    {% endif %}
+    
     </div> <!-- End of Subs and Stylists-->
     
-    <div class = "row"><!--Personality Form in here-->
-    </div> <!-- End of Form -->
+
     
     
 </div> <!--End of Profile Container -->
     
+    
+    <script type="text/javascript">
+        function cancelSubscriptionCheck() {
+            if (confirm('Are you sure you want to cancel?')) {
+                return true;
+            }
+            return false;
+        }
+    </script>
+    
+    <script type="text/javascript">
+        function show_alert() {
+            alert("Thanks, we'll let our stylists know!");
+}
+        
+    </script>
     
  
     

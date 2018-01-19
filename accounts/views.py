@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse, HttpResponseRedirect
 from django.contrib import messages, auth
-from .forms import UserLoginForm, UserRegistrationForm, StartASub
+from .forms import UserLoginForm, UserRegistrationForm, StartASub, PersonalSubform, PhotoForm, UpdateNeeds, ContactForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.utils import timezone
@@ -74,7 +74,9 @@ def register(request):
  
 @login_required() 
 def profile(request):
-     return render(request, 'profile.html')
+    form = PhotoForm
+    updateform = UpdateNeeds
+    return render(request, 'profile.html', {'form':form, 'updateform':updateform})
      
      
      
@@ -82,6 +84,7 @@ def profile(request):
 def subscribe(request):
     if request.method == 'POST':
         form = StartASub(request.POST)
+        personalform  = PersonalSubform(request.POST)
         
         if form.is_valid():
             try:
@@ -109,9 +112,9 @@ def subscribe(request):
     
     else:
         form = StartASub
+        personalform = PersonalSubform        
         
-        
-    args = {'subform': form, 'publishable': settings.STRIPE_PUBLISHABLE_KEY}
+    args = {'subform': form, 'persubform':personalform, 'publishable': settings.STRIPE_PUBLISHABLE_KEY}
     args.update(csrf(request))
     return render(request, 'subscribe.html', args)
 
@@ -151,3 +154,29 @@ def subscriptions_webhook(request):
         return HttpResponse(status=404)
 
     return HttpResponse(status=200)
+    
+    
+@login_required()
+def change_photo(request, pk):
+    user = request.user.objects.get(pk=pk)
+    if request.method=="POST":
+        form=forms.PhotoForm(request.POST,request.FILES)
+        if form.is_valid():
+            profile=form.save(commit=False)
+            profile.user=request.user
+            profile.save()
+            return redirect('profile')
+    else:
+        form=forms.PhotoForm()
+    return render(request,'profile.html', {'form':form})
+    
+    
+def contactus(request):
+    form= ContactForm
+    return render (request, 'contact.html', {'form':form})
+        
+    
+def faq(request):
+    
+    return render (request, 'faq.html')
+    

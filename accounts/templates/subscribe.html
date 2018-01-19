@@ -13,12 +13,19 @@
 {% endblock %}
 
 {% block content %}
-    <form id="payment-form" role="form" method="post" action="{% url 'subscribe' %}"  class="align_centre margin_20">
+    <div id ="subintro">
+        <h3>Sign up for the StyleService</h3>
+        <p>For just €4.99 a month, we set you up with a personalised style selection sent right to your inbox. One of our expert stylists will create a style to suit your features and your budget. Painstakingly browsing through catalogs from your favourite brands and local shops they will create five outfits a month. Just subscribe below and update your personal needs form on your profile as your needs change.</p>
+    </div>
+    <div id = "subformid">
+    <form id="payment-form" role="form" method="post" action="{% url 'subscribe' %}"  class="align_centre">
         <legend>Subscribe</legend>
         {% csrf_token %}
+        {{ persubform | as_bootstrap }}
         {{ subform | as_bootstrap }}
         <div class="form-group">
             <button type="submit" class="btn btn-lg btn-success hvr-grow">Subscribe</button>
         </div>
     </form>
+    </div>
 {% endblock %}

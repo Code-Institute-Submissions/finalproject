@@ -26,6 +26,23 @@ def show_category(request,hierarchy= None):
         return render(request, 'categories.html', {'instance':instance})
     
     
+def root_categories(request):
+    categories = Category.objects.filter(parent=None)
+
+    args = { 'categories': categories, 'subcategories': {}, 'products': {}}
+    return render(request, 'categories.html', args)
+    
+def root_categories_context(request):
+    categories = Category.objects.filter(parent=None)
+
+    category_tree = {}
+
+    for category in categories:
+        sub_categories = Category.objects.filter(parent=category)
+        category_tree[category] = sub_categories
+
+    return {'root_categories': category_tree}
+    
 def do_search(request):
     products = Product.objects.filter(name__icontains=request.GET['q'])
     return render(request, 'products.html', {'products':products})

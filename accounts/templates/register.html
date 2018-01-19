@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 {% block content %}
+
+<div class = "logregform">
     <form method="post" action="{% url 'register' %}" class="accountform">
         <fieldset class="form-group">
             <legend>Create a new account</legend>
@@ -10,4 +12,5 @@
             <button type="submit" class="btn btn-primary">Create account</button>
         </fieldset>
     </form>
+    </div>
 {% endblock %}

@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
+from .models import UserProfile
 
 
 class UserLoginForm(forms.Form):
@@ -56,3 +58,79 @@ class StartASub(forms.Form):
     expiry_month = forms.ChoiceField(label="Month", choices=MONTH_CHOICES, required=False)
     expiry_year = forms.ChoiceField(label="Year", choices=YEAR_CHOICES, required=False)
     stripe_id = forms.CharField(widget=forms.HiddenInput)
+    
+    
+class PersonalSubform(forms.Form):
+        STYLE_CHOICES = (
+                ("Casual", "Casual"),
+                ("Sport", "Sport"),
+                ("Business", "Business"),
+                ("Formal", "Formal"),
+                ("Mix it up", "Mix it up")
+                )
+        styles = forms.ChoiceField(choices=STYLE_CHOICES)
+        GENDER_CHOICES = (
+                ("Male", "Male"),
+                ("Female", "Female"),
+                ("Other", "Other")
+            )
+            
+        gender =forms.ChoiceField( choices=GENDER_CHOICES)
+        
+        height_CM = forms.IntegerField(validators=[MinValueValidator(0),
+                                       MaxValueValidator(300)])
+                                       
+        waist_IN = forms.IntegerField(validators=[MinValueValidator(0),
+                                       MaxValueValidator(100)])
+                                       
+        shoesize = forms.IntegerField(validators=[MinValueValidator(0),
+                                       MaxValueValidator(20)])
+        
+        frontpic = forms.ImageField()
+        sidepic = forms.ImageField()
+        
+        budget = forms.IntegerField()
+        favourite_brands = forms.CharField(widget=forms.Textarea)
+        
+        class Meta:
+            fields = ['Choose Style', 'Gender', 'Height (cm)', 'Waist (in)', 'Shoe Size', 'Front Profile Image', 'Side Profile Image', 'Budget €', 'Favourite Brands']
+            
+        
+class UpdateNeeds(forms.Form):
+        STYLE_CHOICES = (
+                ("Casual", "Casual"),
+                ("Sport", "Sport"),
+                ("Business", "Business"),
+                ("Formal", "Formal"),
+                ("Mix it up", "Mix it up")
+                )
+        styles = forms.ChoiceField(choices=STYLE_CHOICES)
+        waist_IN = forms.IntegerField(validators=[MinValueValidator(0),
+                                       MaxValueValidator(100)])
+        frontpic = forms.ImageField()
+        sidepic = forms.ImageField()
+        
+        budget = forms.IntegerField()
+        favourite_brands = forms.CharField(widget=forms.Textarea)
+        
+        class Meta:
+            fields = ['Choose Style', 'Waist (in)', 'Front Profile Image', 'Side Profile Image', 'Budget €', 'Favourite Brands']
+            
+            
+class PhotoForm(forms.Form):
+    class Meta:
+        model= UserProfile
+        fields=('image')
+        
+    updatepic = forms.ImageField('image')
+    
+    def clean_photo(self):
+        photo=self.cleaned_data.get('image')
+        if photo.size>settings.MAX_UPLOAD_SIZE:
+            raise forms.ValidationError(_("Whoa there! Please upload a smaller image!".format(str(settings.MAX_UPLOAD_SIZE/1000000))))
+        return photo
+        
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    email =  forms.CharField()
+    issue = forms.CharField(widget=forms.Textarea)
