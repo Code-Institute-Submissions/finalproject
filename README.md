@@ -62,17 +62,26 @@ All the code for the particular page is placed in here and will be rendered betw
 ```
 
 
-
-
-    
-
-
-
 ## APPS ##
 
 ### STYLESERVICE (Home) ###
+This is the base of the project and contains the template folder in which 'base.html' is. The base urls.py file is here and the views render the index.html
 
+### Accounts and Packages ###
 
+This app is used for user authentication. Within this app holds all the urls, views and templates for a visitor to the site to register, log in and become a potential customer. They also have the ability to log out. The monthly subscriptions to the styleservice is contained within this app and redirects users to their profile page after they subscribe. From here they can manage/cancel their subscriptions. 
+
+Initially the plan was to hold several subscription types help within the packages app. Due to time constraints these were not implemented but are something that will be updated in the future.
+
+### Products and Categories 
+
+The eCommerce element of this website is contained within these two apps. A small but wide selection of clothing and accessories were added using the admin panel. They can be searched for by category and there is a small menu that filters the categories at the top of 'products.html'
+
+Reviews on products were handled by the Django-Star-Ratings package. After deployment the stars.png was unfortuently not rendering on the heroku page. The mechanism behind the package is still functional and can be observed above the products image in 'product_detail.html'. Investigation showed the star.png was in the S3 bucket and several forums suggested it may refresh and appear within 24hrs. 
+If that is not the case...
+
+* What they should look like:<br/>
+![Working Star](./mockup/starsinaction.png)
 
 
 
