@@ -1,10 +1,10 @@
 from django.test import TestCase
-from .models import Package
+from .models import Packages
 
 # Create your tests here.
 class PackageTests(TestCase):
     
     def test_str(self):
-        test_name = Package(name='A package')
+        test_name = Packages(name='A package')
         self.assertEqual(str(test_name), 'A package')
 

@@ -23,11 +23,10 @@ class UserRegistrationForm(UserCreationForm):
         label='Password Confirmation',
         widget=forms.PasswordInput
     )
-    date_of_birth = forms.CharField(max_length=30)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2', 'date_of_birth']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

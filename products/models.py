@@ -15,11 +15,6 @@ class Product(models.Model):
     slug = models.SlugField()
     ratings = GenericRelation(Rating, related_query_name="products")
     
-    @property
-    def average_rating(self):
-        rating = Review.objects.filter(product=self).aggregate(Avg('rating'))
-        return rating['rating__avg']
-    
         
     def __str__(self):
         return self.name 
