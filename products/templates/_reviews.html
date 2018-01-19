@@ -1,6 +1,7 @@
 {% load bootstrap_tags %}
 {% load ratings %}
 
+<div class = "posttitles">
 <h2>Reviews</h2>
 
 <form method ='POST' action="{% url 'add_review' product.id %}">
@@ -12,7 +13,6 @@
 {% for review in product.reviews.all %}
 
 <div>
-    <p>This is our Partial HTML Page</p>
     <h3>{{ review.title }} -{% ratings product %} </h3>
     <p>{{ review.content }}</p>
     <p><strong>{{ review.author.username }}</strong> - {{ review.created_date }}</p>
@@ -20,4 +20,6 @@
 
 
 
+
 {% endfor %}
+</div>

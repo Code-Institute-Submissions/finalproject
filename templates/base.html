@@ -53,7 +53,31 @@
                 </ul>
             </div>
         </div>
-    </nav>
+        
+        <!--<hr>-->
+<!--        <div class="productdropdown">-->
+<!--    <ul class="menubuttons">-->
+<!--        <li><a href="{% url 'productlist' %}">Browse All</a></li> -->
+
+<!--            {% for category, subcategories in root_categories.items %}-->
+<!--                <li class="dropdown" id="category.name">-->
+<!--                    <a href="{% url 'category' category.id %}" class="dropdown-toggle" role="button" aria-haspopup="true" -->
+<!--                            aria-expanded="false"> {{ category.name }} <span class="caret"></span></a>-->
+
+<!--                            <ul class="dropdown-menu" id="dropdown-menu-{{category.name}}">-->
+<!--                            {% for sub in subcategories %}-->
+<!--                                <li><a href="{% url 'category' sub.id %}"-->
+<!--                                >{{ sub.name }}</a></li>                    -->
+<!--                            {% endfor%}-->
+<!--                            </ul>-->
+<!--                            </li>-->
+<!--                    {% endfor %}-->
+
+<!--                    </ul>-->
+<!--</div>-->
+
+</nav>
+
     <div class = "content">
     
     <div class="container">
@@ -89,5 +113,6 @@
             <p>Made by Stephen Scott, Code Institute Stream 3 Project</p>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
 </body>
 </html>

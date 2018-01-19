@@ -2,14 +2,19 @@
 
 {% load ratings %}
 {% block content %}
-    <div class="row">
-        <form action="{% url 'search'%}" method="get">
+<div id = "productmenu">
+
+
+
+    <form action="{% url 'search'%}" method="get">
            
             <input type="text" name="q">
             
             <button type="submit">Search</button>
             
-        </form>
+            
+    </form>
+</div><!--End of Product Menu -->
         
         {% load namify %}
 
@@ -22,32 +27,20 @@
     
         </ul> 
          
-        <div class="col-md-10 col-sm-9">
-            <table>
-                
-                <thead>
-       <tr>
-           
-           <th><h5>Product Photo</h5></th>
-           <th>Name</th>
-           <th>Description</th>
-           <th>Price</th>
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <div class = "prodrating">
+                <h3>Rating</h3>
             
-       </tr>
-       </thead>
-           <tr>
-              <tbody>
-               <td> <img src="{{ MEDIA_URL }}{{ product.image }}"/></td>
-                 <td><h5>{{ product.name }}</h5></td>
-                  <td><h5>{{ product.description }}</h5></td> 
-                    <td><h5>€{{ product.price }}</h5></td> 
-                     {% ratings product %}
-                     
-             
-               </tbody>
-               </td>
-              </tr>
-              </table>
+            {% ratings product %}
+            </div>
+            <img src="{{ MEDIA_URL }}{{ product.image }} " style = "max-width:80%; max-height:auto;"/>
+            <h3>{{ product.name }} - € {{product.price }}</h3>
+            <p>{{ product.description}}</p>
+            
+            
+            
+            
+            
            
        
       
@@ -63,16 +56,14 @@
         </div>
     </div>
     
-    <div>
-        {% for productImage in product.images.all %}
-        <img src="{{MEDIA_URL}}{{productImage}}"/>
-        {% endfor %}
-        
-    </div>
-    
+    <div class = "comments">
     {% include '_reviews.html' %}
     
+    
+    </div>
     
      
 
 {% endblock %}
+
+

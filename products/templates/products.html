@@ -1,21 +1,40 @@
 {% extends "base.html" %}
-{% load mptt_tags %}
 {% block content %}
 
+<div class = "dropdownmenu">
+    
+    <div class="productdropdown">
+    <ul class="menubuttons list-inline">
+        <li><a href="{% url 'productlist' %}">Browse All</a></li> 
 
-<div id = "productmenu">
+            {% for category, subcategories in root_categories.items %}
+                <li class="dropdown" id="category.name" data-toggle = "dropdown">
+                    <a href="{% url 'category' category.id %}" class="dropdown" role="button" aria-haspopup="true" 
+                            aria-expanded="false"> {{ category.name }} <span class="caret"></span></a>
 
-
-
-    <form action="{% url 'search'%}" method="get">
-           
-            <input type="text" name="q">
-            
-            <button type="submit">Search</button>
-            
-            
-    </form>
-</div><!--End of Product Menu -->
+                            <ul class="dropdown-menu" id="dropdown-menu-{{category.name}}">
+                            {% for sub in subcategories %}
+                                <li class = "list-inline-it"><a href="{% url 'category' sub.id %}"
+                                >{{ sub.name }}</a></li>                    
+                            {% endfor%}
+                            </ul>
+                            </li>
+                    {% endfor %}
+                    
+                    
+                    </ul>
+                    
+                    
+                    <!--Error with dropdown on hover. Unable to complete with time constraints-->
+                    
+        
+        
+        
+    </div><!-- end of Dropdown-->
+    
+    
+    
+</div>
 
         {% for product in products  %}
 
