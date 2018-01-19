@@ -19,7 +19,6 @@
                     {% endif %}
                     <p>{{ post.content }}</p>
                     <button class="btn btn-default" onclick="location.href='{% url 'posts' %}'">Back To Blog</button>
-                    <button class="btn btn-default" onclick="location.href='{% url 'editpost' post.id %}'">Edit</button>
                     <p>{{ post.published_date }} | Views: {{post.views}} | <strong>TAGS: </strong> {{ post.tag }} </p>
                 </div>
             </div>
