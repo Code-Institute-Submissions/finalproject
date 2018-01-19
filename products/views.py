@@ -29,7 +29,6 @@ def add_review(request, product_id):
         review = form.save(commit=False)
         review.author = request.user
         review.product = product
-        review.rating = form.cleaned_data.get('rating')
         
         review.save()
         
