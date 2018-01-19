@@ -83,6 +83,87 @@ If that is not the case...
 * What they should look like:<br/>
 ![Working Star](mockups/starinaction.png)
 
+### Cart and Checkout ###
+
+The cart app uses a 'contexts.py' file to store a users cart contents in a session. The checkout is able to take this session and put the payment through as a one off payment with Stripe.
+
+### BLOG ###
+
+The blog was set up to render posts, or fashion peices. A user is not able to create their own posts as I wished that to be just for "Stylists" but they can comment under posts. 
+The 'posts.html' page has the beginning of each posts contents truncated so as the user needs to click in to read the rest. 
+
+
+## Deployment and Hosting ##
+This Project was deployed and is hosted on Heroku with automatic deploys from GitHub. 
+
+## Databases and Static ##
+### Databases ###
+Running locally a SQLite database was used. When Deployment occured a Heroku Postgres database was used.
+### Static ###
+Running locally static and media files were stored locally. On Deployment an Amazon S3 bucket was used. 
+
+The settings.py file had to be changed to facilitate the switch over. 
+
+
+## Installation
+
+To clone this project take the following steps:
+
+* Click the green "Clone or Download" button from the top right of this repository.
+* Copy the link into your clipboard, or take it from here - https://github.com/StephenJMScott/finalproject.git
+* Within your terminal ensure you are in the folder you wish to contain the project
+* Create a virtualenv : `virtualenv -p python3`
+* Activate virtualenv: `source bin/activate`
+* Type the following into the command line: `$ git clone "https://github.com/StephenJMScott/finalproject.git`
+* The entire project should be now contained within your desired folder. 
+* Ensure all project dependancies are installed using : `$ pip install -r requirements.txt`
+* Within your bash.rc file or equivilant you will need to create the following :
+```
+export SECRET_KEY=''
+export DEBUG='True'
+
+export STRIPE_PUBLISHABLE_KEY=''
+export STRIPE_SECRET_KEY=''
+
+export EMAIL_HOST_USER='your@gmail.com'    
+export EMAIL_HOST_PASSWORD='yourPassword'
+
+```
+Follow this link to create a new Secret Key- https://www.miniwebtool.com/django-secret-key-generator/
+
+Follow this [link](https://stripe.com
+), create a Stripe account and paste the STRIPE_PUBLISHABLE_KEY, and STRIPE_SECRET_KEY in.
+
+
+Within the settings.py file, line 28 contains `USE_S3 = os.environ.get("USE_S3", True)`
+When False you are running locally, when true you're running from the S3 buckets ect. 
+
+
+## TESTING ##
+
+Throughout this project manual testing was undertaken as well as automated testing. 
+
+`$ python3 manage.py test APPNAME`
+
+### Products ###
+
+`$ python3 manage.py test products` - Will pass. A product requested will be the product returned.
+ 
+### Packages ###
+
+`$ python3 manage.py test packages` - Will pass. A package requested will be the package returned.
+
+### Cart ###
+`$ python3 manage.py test cart` - Will pass. The url for '/cart/' resolves to the 'cart' function in views.py
+
+### Blog ###
+`$ python3 manage.py test packages` - Will pass. The post title requested will be the post returned.
+
+### Accounts ###
+
+`$ python3 manage.py test accounts` - Unfortuently this will not pass as Django is failing to load "the parent '' module. "
+
+I believe this issue is to do with the enviroment not the actual application, as manual testing on all account functions are working as should. 
 
 
 ## A note on development ##
